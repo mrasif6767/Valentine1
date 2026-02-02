@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Farheen 💕 My Valentine</title>
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      max-width: 650px;
+      margin: 10px auto;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 15px;
+    }
+
+    .yes {
+      background-color: #ff2e63;
+      color: white;
+    }
+
+    .no {
+      background-color: #444;
+      color: white;
+      position: absolute;
+    }
+
+    img {
+      width: 260px;
+      margin-top: 20px;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE 1 -->
+  <div id="page1">
+    <h1 id="typing"></h1>
+    <p>My love… will you be my Valentine? 💘</p>
+
+    <button class="yes" onclick="yesClicked()">Yes sweetheart 💖</button>
+    <button class="no" id="noBtn">No 😒</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div id="page2" style="display:none;">
+    <h1>YAYYYYY DARLING 🥹💖</h1>
+    <img src="https://i.imgur.com/9YjYb6C.png" alt="Cute cat with flowers">
+
+    <div id="loveText"></div>
+  </div>
+
+  <script>
+    /* Typing animation */
+    const text = "Farheen 💕";
+    let index = 0;
+    function typeText() {
+      if (index < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeText, 150);
+      }
+    }
+    typeText();
+
+    /* No button runs away */
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 150);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    /* Yes click */
+    function yesClicked() {
+      document.getElementById("page1").style.display = "none";
+      document.getElementById("page2").style.display = "block";
+      startLoveMessage();
+    }
+
+    /* Line-by-line love message */
+    const loveLines = [
+      "Farheen, my love 💕",
+      "",
+      "From the moment you came into my life, everything felt brighter and warmer.",
+      "You turn my ordinary days into something beautiful just by being you.",
+      "Your smile is my favorite sight, and your presence is my peace.",
+      "",
+      "I don’t just choose you today as my Valentine — I choose you every single day.",
+      "Through laughs, silly moments, challenges, and quiet times.",
+      "",
+      "You are my sweetheart, my safe place, my favorite person, and my forever.",
+      "",
+      "Thank you for loving me and making my heart feel so full.",
+      "I promise to always care for you, respect you, and choose you.",
+      "",
+      "I love you endlessly, darling 💖🐱🌹"
+    ];
+
+    let lineIndex = 0;
+    function startLoveMessage() {
+      if (lineIndex < loveLines.length) {
+        const p = document.createElement("p");
+        p.textContent = loveLines[lineIndex];
+        document.getElementById("loveText").appendChild(p);
+        lineIndex++;
+        setTimeout(startLoveMessage, 900);
+      }
+    }
+
+    /* Floating hearts generator */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>
